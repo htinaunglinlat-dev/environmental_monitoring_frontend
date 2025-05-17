@@ -1,45 +1,53 @@
-import { ThemeProvider } from './providers/theme-provider'
-// import ReactRouterProvider from './routes'
+import { ThemeProvider } from "./providers/theme-provider";
 
 import { createBrowserRouter, RouterProvider } from "react-router";
-// import { AppLayout } from "../layouts";
-import { AppLayout } from "./layouts/index"
-import NotFound from './pages/notFound/NotFound';
-import { HomePage } from './pages';
-import { Provider } from 'react-redux';
-import { store } from './store/store';
-import Temperature from './pages/temperature/Temperature';
+import { AppLayout } from "./layouts/index";
+import { DevicePage, NotFoundPage, RoomPage, SensorDataPage } from "./pages";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
+import Temperature from "./pages/temperature/Temperature";
 
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <AppLayout />,
-    errorElement: <h1 className='min-h-screen flex justify-center items-center bg-background'>Error occurred. Look console. </h1>,
+    Component: AppLayout,
     children: [
       {
         path: "/",
-        element: <HomePage />
+        Component: RoomPage,
+        errorElement: (
+          <h1 className="min-h-screen flex justify-center items-center bg-background">
+            Error occurred. Look console.
+          </h1>
+        ),
       },
       {
-        path: "/:deviceId",
-        element: <Temperature />,
+        path: "/:id",
+        Component: Temperature
+      },
+      {
+        path: "/rooms/:roomId",
+        Component: DevicePage,
+      },
+      {
+        path: "/rooms/:roomId/devices/:deviceId",
+        Component: SensorDataPage,
       },
       {
         path: "*",
-        element: <NotFound />
-      }
-    ]
-  }
+        Component: NotFoundPage,
+      },
+    ],
+  },
 ]);
 
 function App() {
   return (
-    <ThemeProvider defaultTheme='light' storageKey='vite-ui-theme'>
+    <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
       <Provider store={store}>
-        <RouterProvider router={router}/>
+        <RouterProvider router={router} />
       </Provider>
     </ThemeProvider>
-  )
+  );
 }
 
-export default App
+export default App;

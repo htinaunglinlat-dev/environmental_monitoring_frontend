@@ -9,16 +9,16 @@ export interface SensorDataType {
 }
 
 import { configureStore } from '@reduxjs/toolkit'
-import { deviceReducer } from './features/deviceSlice';
 import { ledReducer } from './features/ledSlice';
 import { sensorDataReducer } from './features/sensorDataSlice';
+import { roomListReducer } from './features/roomListSlice';
 // ...
 
 export const store = configureStore({
   reducer: {
-    devices: deviceReducer,
     led: ledReducer,
-    sensorData: sensorDataReducer
+    sensorData: sensorDataReducer,
+    roomList: roomListReducer
   },
 })
 

@@ -13,33 +13,29 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { NavLink, useLocation, useNavigate, useParams } from "react-router";
+import { NavLink, useNavigate, useParams } from "react-router";
 import { useAppSelector } from "@/store/hook";
+import type { RoomType } from "@/store/features/roomListSlice";
 
 const AppBreadCrumb = () => {
-  const navigate = useNavigate();
+  // const deviceList = useAppSelector((state) => state.devices.lists);
+  const roomList = useAppSelector((state) => state.roomList)
 
-  const deviceList = useAppSelector((state) => state.devices.lists);
+  const { deviceId, roomId } = useParams<{
+    deviceId: string;
+    roomId: string;
+  }>();
 
-  const { deviceId } = useParams<{ deviceId: string }>();
-
-  // console.log("deviceId", deviceId);
-
-  const { pathname } = useLocation();
-  // console.log("location", location.pathname);
-
-  const handleDeviceSelect = (id: string) => {
-    navigate(`/${id}`);
-  };
+  console.log("deviceId", deviceId)
+  console.log("roomId", roomId)
 
   return (
     <Breadcrumb className="px-2 py-1 bg-secondary w-fit rounded-xs my-2 ml-3">
       <BreadcrumbList>
         <AppBreadCrumbLists
-          path={pathname}
-          deviceId={deviceId!}
-          deviceList={deviceList}
-          onSelect={handleDeviceSelect}
+          deviceId={deviceId}
+          roomId={roomId}
+          roomList={roomList}
         />
       </BreadcrumbList>
     </Breadcrumb>
@@ -47,28 +43,82 @@ const AppBreadCrumb = () => {
 };
 
 type AppBreadCrumbListsProps = {
-  path: string;
-  deviceId: string;
-  deviceList: string[];
-  onSelect: (id: string) => void;
+  deviceId: string | undefined;
+  roomId: string | undefined;
+  roomList: Record<string, RoomType>;
 };
 
 const AppBreadCrumbLists: React.FC<AppBreadCrumbListsProps> = ({
-  path,
   deviceId,
-  deviceList,
-  onSelect,
+  roomId,
+  roomList,
 }) => {
-  // if(path.startsWith("/temperature"))
-  if (path.startsWith("/")) {
-    return (
-      <>
-        <BreadcrumbItem>
-          <BreadcrumbLink asChild>
-            <NavLink to={"/"}>Home</NavLink>
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-        {path !== "/" && (
+  const navigate = useNavigate();
+  const handleRoomSelect = (roomId: string) => {
+    navigate(`/rooms/${roomId}`);
+  };
+  const handleDeviceSelect = (deviceId: string) => {
+    navigate(`/rooms/${roomId}/devices/${deviceId}`)
+  }
+  return (
+    <>
+      <BreadcrumbItem>
+        <BreadcrumbLink asChild>
+          <NavLink to={"/"}>Home</NavLink>
+        </BreadcrumbLink>
+      </BreadcrumbItem>
+      {roomId && (
+        <>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center gap-1">
+                {roomId}
+                <ChevronDown />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start">
+                {Object.values(roomList).map((item, index) => (
+                  <DropdownMenuItem
+                    key={index}
+                    onSelect={() => handleRoomSelect(item.roomName)}
+                  >
+                    {item.roomName}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </BreadcrumbItem>
+          {deviceId && (
+            <>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <DropdownMenu>
+                  <DropdownMenuTrigger className="flex items-center gap-1">
+                    {deviceId}
+                    <ChevronDown />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="start">
+                    {roomList[roomId!]?.deviceList.map((device, index) => (
+                      <DropdownMenuItem
+                        key={index}
+                        onSelect={() => handleDeviceSelect(device)}
+                      >
+                        {device}
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </BreadcrumbItem>
+            </>
+          )}
+        </>
+      )}
+    </>
+  );
+};
+
+/*
+{path !== "/" && (
           <>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
@@ -90,12 +140,6 @@ const AppBreadCrumbLists: React.FC<AppBreadCrumbListsProps> = ({
               </DropdownMenu>
             </BreadcrumbItem>
           </>
-        )}
-      </>
-    );
-  }
-
-  return null
-};
+*/
 
 export default AppBreadCrumb;

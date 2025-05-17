@@ -1,4 +1,4 @@
-import type { SensorDataType } from "@/pages/temperature/Temperature";
+import type { SensorDataType } from "@/socket/socket";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 type InitialStateType = Pick<SensorDataType, "air_quality" | "humidity" | "temperature">

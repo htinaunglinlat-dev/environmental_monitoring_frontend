@@ -1,28 +1,29 @@
 import { NavLink, useParams } from "react-router";
 import {
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
+  SidebarMenuButton,
 } from "./ui/sidebar";
+import { cn } from "@/lib/utils";
 
-const AppSidebarSubItem: React.FC<{ deviceId: string }> = ({ deviceId: id }) => {
-
-  const {deviceId} = useParams()
+const AppSidebarSubItem: React.FC<{ deviceId: string }> = ({
+  deviceId: id,
+}) => {
+  const { deviceId } = useParams();
 
   return (
-    <SidebarMenuSub>
-      <SidebarMenuSubItem>
-        <SidebarMenuSubButton asChild>
-          <NavLink
-            to={`/${id}`}
-            className={`${deviceId === id ? "bg-blue-500 text-white shadow-md hover:bg-blue-500! hover:text-white" : ""}`}
-          >
-            {id}
-          </NavLink>
-        </SidebarMenuSubButton>
-      </SidebarMenuSubItem>
-    </SidebarMenuSub>
+    <SidebarMenuButton asChild>
+      <NavLink
+        to={`/${id}`}
+        className={cn(
+          "text-md! rounded-none py-5 font-semibold",
+          id === deviceId
+            ? "bg-blue-300/80 hover:bg-blue-300/60! text-black hover:text-black! border-r-6 border-r-blue-500"
+            : ""
+        )}
+      >
+        {id}
+      </NavLink>
+    </SidebarMenuButton>
   );
-};
+}
 
 export default AppSidebarSubItem;
