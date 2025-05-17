@@ -81,7 +81,7 @@ const AppNavbar = () => {
         </Button>
       </div> */}
       <div className="flex gap-2 items-center mr-20">
-        <div>Socket Status: </div>
+        {/* <div>Socket Status: </div> */}
         <div>
           {socketStatus === "connected" ? (
             <div className="bg-green-600 text-white py-0.5 px-2 rounded-md">CONNECTED</div>

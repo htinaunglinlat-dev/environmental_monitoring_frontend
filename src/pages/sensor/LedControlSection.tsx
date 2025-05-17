@@ -34,7 +34,7 @@ const LedControlSection = () => {
   return (
     <div className="mb-2">
       <h1 className="text-md text-muted-foreground font-semibold pb-2">
-        Controlling LEDs
+        Controlling LED
       </h1>
       <div className="grid grid-cols-6">
         <AppLedToggle

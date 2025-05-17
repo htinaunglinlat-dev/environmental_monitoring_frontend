@@ -27,7 +27,7 @@ const Device = () => {
             <h1 className="font-bold text-muted-foreground">Room Name:</h1>
             <div className="text-2xl">{roomId}</div>
           </CardTitle>
-          <Button className="cursor-pointer bg-blue-700 hover:bg-blue-600 transition">
+          <Button className="cursor-pointer transition" variant={"ghost"}>
             <Pencil />
           </Button>
         </CardHeader>
@@ -46,10 +46,10 @@ const Device = () => {
                     <ChevronRight />
                   </CardHeader>
                   <CardContent>
-                    <ul className="grid grid-cols-3 gap-3">
+                    <ul className="gap-3">
                       {badgeList.map((item, index) => (
                         <li
-                          className={`${item.color} text-center py-1 px-2 capitalize rounded-md max-w-32`}
+                          className={`${item.color} text-center py-1 px-2 capitalize rounded-md m-2 my-1 inline-block`}
                           key={index}
                         >
                           {item.value}

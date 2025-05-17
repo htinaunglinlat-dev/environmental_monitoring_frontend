@@ -46,12 +46,12 @@ const SensorValueSection = () => {
     return () => {
       socket.off("datas");
     };
-  }, []);
+  }, [deviceId]);
 
   return (
     <>
       <h1 className="text-md text-muted-foreground font-semibold pb-2">
-        Displaying Temperature Values
+        Displaying Sensor Values
       </h1>
       <hr />
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 3xl:grid-cols-4 p-2 my-2">

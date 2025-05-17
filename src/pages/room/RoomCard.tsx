@@ -25,7 +25,7 @@ const RoomCard: React.FC<Props> = ({ room }) => {
         <ChevronRight />
       </CardHeader>
       <CardContent>
-        <h1 className="text-muted-foreground font-bold mb-2">Device Lists</h1>
+        <h1 className="text-muted-foreground font-bold mb-2">Devices</h1>
         {room.deviceList.length ? (
           <div className="space-x-3">
             {room.deviceList.map((list, index) => (
