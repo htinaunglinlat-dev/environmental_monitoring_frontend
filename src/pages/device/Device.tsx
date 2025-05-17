@@ -42,7 +42,7 @@ const Device = () => {
               <Link to={`/rooms/${roomId}/devices/${device}`} key={device}>
                 <Card key={device}>
                   <CardHeader className="flex justify-between">
-                    <h1 className="text-primary font-bold">Device ID: {device}</h1>
+                    <h1 className="text-primary font-bold">{device}</h1>
                     <ChevronRight />
                   </CardHeader>
                   <CardContent>

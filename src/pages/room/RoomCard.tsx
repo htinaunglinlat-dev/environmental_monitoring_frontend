@@ -21,7 +21,7 @@ const RoomCard: React.FC<Props> = ({ room }) => {
   return (
     <Card className="cursor-pointer" onClick={clickHandlerRoom}>
       <CardHeader className="flex justify-between items-center">
-        <CardTitle className="font-bold text-xl">{room.roomName}</CardTitle>
+        <CardTitle className="font-bold text-xl capitalize">{room.roomName}</CardTitle>
         <ChevronRight />
       </CardHeader>
       <CardContent>
