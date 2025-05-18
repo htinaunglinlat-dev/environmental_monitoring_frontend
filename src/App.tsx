@@ -6,23 +6,28 @@ import { DevicePage, NotFoundPage, RoomPage, SensorDataPage } from "./pages";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 import Temperature from "./pages/temperature/Temperature";
+import { AppKeyboard } from "./components";
 
 const router = createBrowserRouter([
   {
     Component: AppLayout,
+    errorElement: (
+      <h1 className="min-h-screen flex justify-center items-center bg-background">
+        Error occurred. Look console.
+      </h1>
+    ),
     children: [
       {
         path: "/",
         Component: RoomPage,
-        errorElement: (
-          <h1 className="min-h-screen flex justify-center items-center bg-background">
-            Error occurred. Look console.
-          </h1>
-        ),
+      },
+      {
+        path: "/keyboard",
+        Component: AppKeyboard,
       },
       {
         path: "/:id",
-        Component: Temperature
+        Component: Temperature,
       },
       {
         path: "/rooms/:roomId",
