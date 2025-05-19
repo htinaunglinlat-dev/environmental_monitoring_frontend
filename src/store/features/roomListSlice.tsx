@@ -38,8 +38,21 @@ const roomListSlice = createSlice({
           ...action.payload.deviceList,
         ];
       } else {
-        state[action.payload.roomName].deviceList = [...state[action.payload.roomName].deviceList, action.payload.deviceList]
+        state[action.payload.roomName].deviceList = [
+          ...state[action.payload.roomName].deviceList,
+          action.payload.deviceList,
+        ];
       }
+    },
+    renameRoom: (
+      state,
+      action: PayloadAction<{ oldRoomName: string; newRoomName: string }>
+    ) => {
+      state[action.payload.newRoomName.toLowerCase()] = {
+        roomName: action.payload.newRoomName,
+        deviceList: state[action.payload.oldRoomName.toLowerCase()].deviceList,
+      };
+      delete state[action.payload.oldRoomName]
     },
   },
 });

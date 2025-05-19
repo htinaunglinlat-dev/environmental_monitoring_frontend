@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAppSelector } from "@/store/hook";
 import { ChevronRight, Pencil } from "lucide-react";
+// import { useState } from "react";
 import { Link, useParams } from "react-router";
 
 const badgeList = [
@@ -18,6 +19,8 @@ const Device = () => {
   const { roomId } = useParams();
 
   const deviceList = roomId ? roomList[roomId].deviceList : [] as string[];
+
+  // const [isEdit, setIsEidt] = useState(false)
 
   return (
     <div className="p-4">

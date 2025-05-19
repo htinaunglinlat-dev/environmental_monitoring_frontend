@@ -11,6 +11,7 @@ import { addRoom } from "@/store/features/roomListSlice";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { DialogDescription } from "@radix-ui/react-dialog";
+// import { AppKeyboardWrapper } from "@/components";
 
 const recommendedList = [
   "bedroom",
