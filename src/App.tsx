@@ -2,11 +2,18 @@ import { ThemeProvider } from "./providers/theme-provider";
 
 import { createBrowserRouter, RouterProvider } from "react-router";
 import { AppLayout } from "./layouts/index";
-import { DevicePage, NotFoundPage, RoomPage, SensorDataPage } from "./pages";
+import {
+  DevicePage,
+  LoginPage,
+  NotFoundPage,
+  RoomPage,
+  SensorDataPage,
+} from "./pages";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 import Temperature from "./pages/temperature/Temperature";
 import { AppKeyboard } from "./components";
+import { KeyboardProvider } from "./providers/keyboard-provider";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/keyboard",
         Component: AppKeyboard,
+      },
+      {
+        path: "/login",
+        Component: LoginPage,
       },
       {
         path: "/:id",
@@ -48,9 +59,11 @@ const router = createBrowserRouter([
 function App() {
   return (
     <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
-      <Provider store={store}>
-        <RouterProvider router={router} />
-      </Provider>
+      <KeyboardProvider>
+        <Provider store={store}>
+          <RouterProvider router={router} />
+        </Provider>
+      </KeyboardProvider>
     </ThemeProvider>
   );
 }
