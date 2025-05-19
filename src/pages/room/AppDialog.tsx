@@ -1,5 +1,5 @@
 import { useAppDispatch } from "@/store/hook";
-import { useRef, useState, type ChangeEvent, type FormEventHandler } from "react";
+import { useState, type FormEventHandler } from "react";
 import {
   Dialog,
   DialogContent,
@@ -11,7 +11,7 @@ import { addRoom } from "@/store/features/roomListSlice";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { DialogDescription } from "@radix-ui/react-dialog";
-import { AppKeyboardWrapper } from "@/components";
+// import { AppKeyboardWrapper } from "@/components";
 
 const recommendedList = [
   "bedroom",

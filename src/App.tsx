@@ -12,7 +12,7 @@ import {
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 import Temperature from "./pages/temperature/Temperature";
-import { AppKeyboard } from "./components";
+// import { AppKeyboard } from "./components";
 import { KeyboardProvider } from "./providers/keyboard-provider";
 
 const router = createBrowserRouter([
@@ -27,10 +27,6 @@ const router = createBrowserRouter([
       {
         path: "/",
         Component: RoomPage,
-      },
-      {
-        path: "/keyboard",
-        Component: AppKeyboard,
       },
       {
         path: "/login",

@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { type FunctionComponent, useState, type RefObject } from "react";
+import { type FunctionComponent, type RefObject } from "react";
 import Keyboard from "react-simple-keyboard";
 import "react-simple-keyboard/build/css/index.css";
 
